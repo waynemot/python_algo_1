@@ -29,7 +29,7 @@ print(query)
 #                "Trusted_Connection = yes;")%(
 #connStr = ("Driver=%s;" "Server = %s;" "Database = %s;" "uid = %s;" "password = %s;" )%( config.udb.driver, config.udb.host, config.udb.database, config.udb.username, config.udb.password)
 #connStr = ("Driver=%s;" "Server=%s;" "Database=%s;" "uid=%s;" "password='%s';" )%( driver, host, database, uname, pw)
-connStr = {"user":uname, "password":pw, "host":'localhost', 'database':'wmotycka'}
+connStr = {"user":uname, "password":pw, "host":'localhost', 'database':'usgs_crns_production'}
 try:
   #conn = pyodbc.connect(connStr)
   conn = mariadb.connect(**connStr)
