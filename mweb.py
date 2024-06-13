@@ -48,7 +48,7 @@ try:
   cursor = conn.cursor()
   cursor.execute(query)
   result = cursor.fetchone()
-  print result
+  print(result)
   #for row in cursor:
     #(id, name, site_id, created_at, updated_at, installation, customer, number, irid_imei_number, description, n1_n0, n2_n0, n3_n0, center_latitude, center_longitude, elevation, timezone, cutoff_rigidity, mean_pressure, mean_water_vapor, bulk_density, lattice_water, soil_organic_carbon, bio_mass, installation_date, removal_date, has_gps_data, last_date, calibrated, selected, status, network_affiliation, algorithm, entity, short_name, station_id )
     #print(*row, sep=' ')
