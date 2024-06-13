@@ -17,14 +17,18 @@ driver = "MariaDB ODBC 3.1 Driver"
 #database = 'usgs_crns_corr_production'
 database='wmotycka'
 
-print("user: "+uname);
-print("pass: "+pw);
+if not uname:
+  print("user env variable not set/found")
+if not pw:
+  print("passwd env variable not set/found")
+#print("user: "+uname);
+#print("pass: "+pw);
 
 #query = 'SELECT login, nuid FROM view_login_nuid where nuid in (\'35140602\')'
 #query = 'SELECT * FROM view_login_nuid limit 1'
 #query = "SELECT * FROM sites WHERE removal_date is null LIMIT 2"
 query = "SELECT * FROM sites"
-
+print("Query string:")
 print(query)
 #                 "charset=utf8mb4;")%(
 #                "Trusted_Connection = yes;")%(
