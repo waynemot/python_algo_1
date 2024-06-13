@@ -47,8 +47,11 @@ try:
   #conn.setencoding(encoding='iso-8859-1')
   cursor = conn.cursor()
   cursor.execute(query)
-  while result = cursor.read_next()
+  result = cursor.fetchone()
+  while True:
+    if not result: break
     print(result)
+    result = cursor.fetchone()
   #result = cursor.fetchone()
   #print(result)
   #for row in cursor:
