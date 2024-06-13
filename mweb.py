@@ -1,7 +1,8 @@
 import pickle
 import os
 #import pyodbc
-import mariadb
+#import mariadb
+import pymysql.cursors
 #from config import config
 
 # Environment vars inspection
@@ -30,9 +31,11 @@ print(query)
 #connStr = ("Driver=%s;" "Server = %s;" "Database = %s;" "uid = %s;" "password = %s;" )%( config.udb.driver, config.udb.host, config.udb.database, config.udb.username, config.udb.password)
 #connStr = ("Driver=%s;" "Server=%s;" "Database=%s;" "uid=%s;" "password='%s';" )%( driver, host, database, uname, pw)
 connStr = {"user":uname, "password":pw, "host":'localhost', 'database':'usgs_crns_production'}
+pymyStr = {"user":uname, "password":pw, "host":'localhost', 'database':'usgs_crns_production', 'charset':'utf8mb4', 'cursorclass':pymysql.cursors.DictCursor}
 try:
   #conn = pyodbc.connect(connStr)
-  conn = mariadb.connect(**connStr)
+  #conn = mariadb.connect(**connStr)
+  conn = pymysql.connect(**pymyStr)
   #conn.setencoding(encoding='utf-8')
   #conn.setencoding('utf-8')
   #conn.setdecoding(pyodbc.SQL_CHAR, encoding='utf-8', ctype=pyodbc.SQL_CHAR)
@@ -44,13 +47,16 @@ try:
   #conn.setencoding(encoding='iso-8859-1')
   cursor = conn.cursor()
   cursor.execute(query)
+  #result = cursor.fetchone()
+  #print result
   for row in cursor:
     #(id, name, site_id, created_at, updated_at, installation, customer, number, irid_imei_number, description, n1_n0, n2_n0, n3_n0, center_latitude, center_longitude, elevation, timezone, cutoff_rigidity, mean_pressure, mean_water_vapor, bulk_density, lattice_water, soil_organic_carbon, bio_mass, installation_date, removal_date, has_gps_data, last_date, calibrated, selected, status, network_affiliation, algorithm, entity, short_name, station_id )
     print(*row, sep=' ')
    # (login,nuid) = row
    # print(site_id)
    # print(name)
-except mariadb.Error as e:
-  print("unable to connect to db")
+#except mariadb.Error as e:
+except pymysql.Error as e:
+  print("unable to connect/query db")
   print(e)
 
